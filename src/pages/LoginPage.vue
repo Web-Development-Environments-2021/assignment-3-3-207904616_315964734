@@ -93,8 +93,10 @@ export default {
     },
     async Login() {
       try {
+        // console.log(this.form.username)
+        // console.log(this.form.password)
         const response = await this.axios.post(
-          "https://localhost:3000/user/Login",
+          "http://localhost:3000/login",
           {
             username: this.form.username,
             password: this.form.password
