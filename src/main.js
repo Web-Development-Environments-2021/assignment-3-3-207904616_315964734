@@ -7,7 +7,8 @@ import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({
-  routes
+  mode: 'history',
+  routes: routes
 });
 
 import Vuelidate from "vuelidate";
@@ -63,6 +64,7 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+axios.defaults.withCredentials = true;
 
 Vue.use(VueAxios, axios);
 
