@@ -1,6 +1,8 @@
 <template>
   <div class="container">
+    <center>
     <h1 class="title">Main Page</h1>
+    </center>
     <LoginPage v-if="!$root.store.username"></LoginPage>
     <FavoriteGames v-else></FavoriteGames>
     <LeagueInfo></LeagueInfo>

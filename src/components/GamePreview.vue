@@ -1,13 +1,13 @@
 <template>
   <div class="game-preview">
-    <div :title="id" class="game-title">
-      <b>Game Id:</b> {{ id }}
+    <div :title="game_id" class="game-title">
+      <br/><b>Game Id:</b> {{ game_id }}
     </div>
     <ul class="game-content">
-      <li> host: {{ hostTeam }}</li>
-      <li> guest: {{ guestTeam }}</li>
-      <li> date: {{ date }}</li>
-      <li> time: {{ hour }}</li>
+      <li> Home Team: {{ home_team_id }}</li>
+      <li> Away Team: {{ away_team_id }}</li>
+      <li> Date: {{ date_time }}</li>
+      <li> Stadium: {{ stadium }}</li>
     </ul>
   </div>
 </template>
@@ -16,25 +16,35 @@
 export default {
   name: "GamePreview",
   props: {
-      id: {
+      game_id: {
         type: Number,
         required: true
       },
-      hostTeam: {
+      home_team_id: {
+        type: Number,
+        required: true
+      },
+      away_team_id: {
+        type: Number,
+        required: true
+      },
+      date_time: {
         type: String,
         required: true
       },
-      guestTeam: {
+      stadium: {
         type: String,
         required: true
       },
-      date: {
-        type: String,
-        required: true
+      home_goals: {
+        type: Number
       },
-      hour: {
-        type: String,
-        required: true
+      away_goals: {
+        type: Number
+        },
+
+      winner_team_id: {
+        type: Number
       }
   }, 
   mounted(){
@@ -46,20 +56,28 @@ export default {
 <style>
 .game-preview {
   display: inline-block;
-  width: 250px;
-  height: 200px;
+  width: 600px;
+  height: 187px;
   position: relative;
   margin: 10px 10px;
   border-style: solid;
-  border-radius: 10px;
+  color: aliceblue;
+  font-weight: bold;
+  /* border-radius: 3px;
   border-width: 5px;
-  border-color:cadetblue;
+  border-color:cadetblue; */
+  /* background-color: #E1EBEE; */
+  background-image: url("/soccer-field-2.jpg");
+  /* opacity: 0.2; */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  background-position: center; /* Center the image */
+
 }
 
 .game-preview .game-title {
   text-align: center;
   text-transform: uppercase;
-  color:  rgb(111, 197, 157);
+  color:  #426347;
 }
 
 .game-preview .game-content {

@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand :to="{ name: 'main' }">Superliga Home</b-navbar-brand>
+    <b-navbar toggleable="lg" type="dark" style="background-color: #009E60" >
+      <img src="/Superliga.png" height="50" style="padding: 1px">
+      <b-navbar-brand :to="{ name: 'main' }" style="padding-left: 15px">Superliga Home</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
 
