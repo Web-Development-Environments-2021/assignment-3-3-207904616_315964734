@@ -63,7 +63,7 @@ axios.interceptors.response.use(
     // Do something with response error
     return Promise.reject(error);
   }
-);
+);  
 axios.defaults.withCredentials = true;
 
 Vue.use(VueAxios, axios);
@@ -95,6 +95,19 @@ new Vue({
     };
   },
   methods: {
+
+    async getAllTeams(){
+      const response =  await this.axios.get("http://localhost:3000/teams/allTeams",); 
+      // console.log(response)           
+      localStorage.setItem('allTeams', JSON.stringify(response.data));
+    },
+
+    async getAllPlayers(){
+      const response = await this.axios.get("http://localhost:3000/player/allPlayers")           
+      localStorage.setItem('allPlayers', JSON.stringify(response.data));
+   
+    },
+
     toast(title, content, variant = null, append = false) {
       this.$bvToast.toast(`${content}`, {
         title: `${title}`,
@@ -104,7 +117,19 @@ new Vue({
         appendToast: append,
         autoHideDelay: 3000
       });
-    }
+    },  
+
   },
-  render: (h) => h(App)
+
+  created(){
+    console.log("app created")
+    this.getAllPlayers(), 
+    this.getAllTeams()
+  },
+
+  render: (h) => h(App),
+
+
+
+  
 }).$mount("#app");
