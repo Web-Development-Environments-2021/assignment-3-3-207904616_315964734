@@ -1,7 +1,7 @@
 <template>
   <div>
     <center>
-    <h2 class="title">Your Upcoming Favorites Games</h2>
+    <h2 class="title">{{$root.store.username.toUpperCase()}}, Your Upcoming Favorites Games</h2>
     </center>
     <br/>
     <GamePreview

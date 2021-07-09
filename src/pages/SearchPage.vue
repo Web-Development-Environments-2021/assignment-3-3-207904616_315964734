@@ -1,34 +1,47 @@
 <template>
-  <div>
-    <h1 class="title">Search Page</h1>
-    <b-input-group prepend="Search Query:" id="search-input">
+  <div class="box">
+    <!-- <h1 class="title">Search Page</h1> -->
+    <center>
+
+    <b-input-group prepend="Search" id="search-input">
       <b-form-input v-model="searchQuery"></b-form-input>
       <b-input-group-append>
-        <b-button @click="searchTeamAndPlayers" variant="success">Search</b-button><br/>
+        <!-- <b-button @click="searchTeamAndPlayers" variant="success">Search</b-button><br/> -->
         <b-form-select v-model="selected" :options="options"></b-form-select>
+        <b-form-select v-model="selectedTeam" :options="teamNames"></b-form-select>
+        <b-form-select v-model="selectedPosition" :options="positionList"></b-form-select>
+
       </b-input-group-append>
     </b-input-group>
+    </center>
       <br/>
-      Your search Query: {{ searchQuery }}
+      <!-- Your search Query: {{ searchQuery }} -->
       <br/> 
-      <h3>Teams:</h3>      
-      <div id="teamsDisplay">        
-        <h5>Results: {{resultsTeams}}</h5>
+      <div class="container">
+        <div class="row">
+      <div id="teamsDisplay" class="teamClass column">        
+      <h3>Teams</h3>      
+        <!-- <h5>Results: {{resultsTeams}}</h5> -->
         <br/>
-        <TeamPreview v-for="team in relevantTeams" :key="team.id"
+        <TeamPreview v-for="team in filterTeamsByTeamName" :key="team.id"
         :teamId="team.id" :teamName="team.name" :imageUrl="team.imageUrl"></TeamPreview>
       </div>
       <br/> <br/>
-      <h3>Players:</h3>
-      <div id ="playersDisplay"> 
-        <h5>Results: {{resultsPlayers}}</h5>  
-            <br/>         
-        <PlayerPreview v-for="player in relevantPlayers" :key="player.id"
+          
+      <div id ="playersDisplay" class="column"> 
+      <h3>Players</h3>
+        <!-- <h5>Results: {{resultsPlayers}}</h5>   -->
+            <br/>
+        <div class="playerclass">
+        <PlayerPreview v-for="player in filterPlayerbyPosition" :key="player.id"
           :id="player.id"
           :playerName="player.name"
           :teamName="player.team_name"
           :position="player.position_id"
           :imageUrl="player.imageUrl"></PlayerPreview>        
+          </div>         
+        </div>
+      </div>
       </div>
     
   </div>
@@ -48,21 +61,91 @@ export default {
  data() {
     return {
       searchQuery:"",
+      selectedTeam: "Select Team",
+      selectedPosition: "Select Position",
       allTeams: JSON.parse(localStorage.getItem('allTeams')),
       allPlayers: JSON.parse(localStorage.getItem('allPlayers')),
       relevantTeams: this.relevantTeams,
       relevantPlayers: this.relevantPlayers,
       resultsTeams: "",
       resultsPlayers: "",
-      selected: null,
+      selected: "Sort By Defult",
       options: [
+        "Sort By Defult",
         "Sort Team by name",
         "Sort Players by name",
         "Sort Players by Team",
-        "Sort Players by position"
+        "Sort Players by position",
       ],
+      positionList: [
+            "Select Position",
+            "Goalkeeper",
+            "Defender",
+            "Midfielder",
+            "Striker"
+        ],
+      sortedAndFilteredTeams: JSON.parse(localStorage.getItem('allTeams')),
       lastSearchQuery: ""
     };
+  },
+  computed:{
+    teamNames(){
+      return ["Select Team",...this.allTeams.map(team => team.name)]
+    },
+    searchQueryLowerCase(){
+      return this.searchQuery.toLowerCase()
+    },
+    filteredTeams(){
+      return this.allTeams.filter(team => team.name.toLowerCase().includes(this.searchQueryLowerCase)) 
+    },
+    filteredPlayers(){
+      return this.allPlayers.filter(player => player.name.toLowerCase().includes(this.searchQueryLowerCase))
+    },
+    // sortTeamByName(){
+    //     return [...this.filteredTeams].sort((a,b) =>(a.name > b.name ? 1 : -1))
+    sortTeamDisplay(){
+        if (this.selected === "Sort Team by name") {
+        // this.sortedAndFilteredTeams = this.sortTeamByName
+        return [...this.filteredTeams].sort((a,b) =>(a.name > b.name ? 1 : -1))
+
+        }
+        return this.filteredTeams
+    },
+    sortPlayerDisplay(){
+      if  (this.selected === "Sort Players by name"){
+         return [...this.filteredPlayers].sort((a,b) =>(a.name > b.name ? 1 : -1))
+      } else if( this.selected === "Sort Players by Team") {
+         return [...this.filteredPlayers].sort((a,b) =>(a.team_name > b.team_name ? 1 : -1))
+      } else if( this.selected === "Sort Players by position") {
+         return [...this.filteredPlayers].sort((a,b) =>(a.position_id > b.position_id ? 1 : -1))
+      }
+      return this.filteredPlayers
+    },
+    filterPlayersByTeamName(){
+      if (this.selectedTeam == "Select Team") return this.sortPlayerDisplay 
+    
+      return this.sortPlayerDisplay.filter(player => player.team_name === this.selectedTeam)
+    },
+    filterTeamsByTeamName(){
+      if (this.selectedTeam == "Select Team") return this.sortTeamDisplay
+       return this.sortTeamDisplay.filter(team => team.name === this.selectedTeam)
+    },
+    filterPlayerbyPosition(){
+      if (this.selectedPosition == "Goalkeeper"){
+        return this.filterPlayersByTeamName.filter(player => player.position_id == 1)
+      } 
+       if (this.selectedPosition == "Defender"){
+        return this.filterPlayersByTeamName.filter(player => player.position_id == 2)
+      } 
+       if (this.selectedPosition == "Midfielder"){
+        return this.filterPlayersByTeamName.filter(player => player.position_id == 3)
+      } 
+       if (this.selectedPosition == "Striker"){
+        return this.filterPlayersByTeamName.filter(player => player.position_id == 4)
+      } 
+      
+      return this.filterPlayersByTeamName 
+    }
   },
   methods:{
     searchTeamAndPlayers(){
@@ -107,15 +190,48 @@ export default {
         this.relevantPlayers = this.relevantPlayers.sort((a,b) =>(a.position_id > b.position_id ? 1 : -1))
       }
     }     
-  },  
- 
+  }
 }
+
 </script>
 
 <style scoped>
 
 #search-input {
   margin-left: 20px; 
-  width: 500px; 
+  width: 55%; 
+
+  /* text-align: center */
+}
+.container{
+  margin: auto;
+  
+
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.playerclass{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.title{
+  color: #1e311b; font-family: 'Lato', sans-serif; font-size: 54px; font-weight: 300; line-height: 58px; margin: 20px 20px 30px; text-align: center
+}
+.box{
+  margin-top: 30px;
 }
 </style>

@@ -1,11 +1,17 @@
 <template>
   <div class="container">
     <center>
-    <h1 class="title">Main Page</h1>
+    <h1 class="title">Welcome To the Superliga</h1>
     </center>
+    <div class="row">
+      <div class="column">
+    <LeagueInfo></LeagueInfo>
+     </div>
+      <div class="column">
     <LoginPage v-if="!$root.store.username"></LoginPage>
     <FavoriteGames v-else></FavoriteGames>
-    <LeagueInfo></LeagueInfo>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -33,5 +39,24 @@ export default {
 ::v-deep .blur .recipe-preview {
   pointer-events: none;
   cursor: default;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+.container{
+  width: 100%;
+  margin: auto;
+}
+.title{
+  color: #1e311b; font-family: 'Lato', sans-serif; font-size: 54px; font-weight: 300; line-height: 58px; margin: 20px 20px 58px;
 }
 </style>

@@ -5,16 +5,16 @@
     img-alt="Image"
     img-top
     tag="article"
-    style="max-width: 20rem;"
+    style="max-width: 20rem; text-align: center;"
     class="mb-2"
   >
     <b-card-text>
         <ul class="game-content">              
-            <li> Team Id: {{ teamId }}</li>               
+            <!-- <li> Team Id: {{ teamId }}</li>                -->
         </ul> 
     </b-card-text>
 
-    <b-button href="#" variant="primary">for games</b-button>
+    <!-- <b-button href="#" variant="primary">for games</b-button> -->
   </b-card>
 </template>
 

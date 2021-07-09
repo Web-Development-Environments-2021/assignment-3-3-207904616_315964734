@@ -62,27 +62,31 @@ export default {
   margin: 10px 10px;
   border-style: solid;
   color: aliceblue;
-  font-weight: bold;
+  /* font-weight: bold; */
   /* border-radius: 3px;
   border-width: 5px;
   border-color:cadetblue; */
-  /* background-color: #E1EBEE; */
-  background-image: url("/soccer-field-2.jpg");
+  background-color: #009E60;
+  /* background-image: url("/soccer-field-2.jpg"); */
   /* opacity: 0.2; */
   background-size: cover; /* Resize the background image to cover the entire container */
   background-position: center; /* Center the image */
+  text-transform: uppercase;
 
 }
 
 .game-preview .game-title {
   text-align: center;
   text-transform: uppercase;
-  color:  #426347;
+  /* color:  #426347; */
+  color: white;
+  font-weight: normal
 }
 
 .game-preview .game-content {
   width: 100%;
   overflow: hidden;
+  list-style-type: none;
 }
 
 
