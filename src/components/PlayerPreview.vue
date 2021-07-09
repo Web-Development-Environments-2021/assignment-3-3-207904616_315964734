@@ -1,14 +1,6 @@
 <template>
- <!-- <div class="card" style="width: 18rem;">
-    <ul class="game-content">
-      <li> Pic: {{imageUrl}}</li>
-      <li>Player Name: {{playerName}} </li>
-      <li> Player Id: {{ id }}</li>
-      <li> Team: {{ teamName }}</li>
-      <li> Position Id: {{ position }}</li>     
-    </ul> 
-</div> -->
-<div class="container">
+
+<div class="container_player">
   <b-card
     :title= "playerName"
     :img-src= "imageUrl"
@@ -20,7 +12,7 @@
    
   >
     <b-card-text>
-        <ul class="game-content">  
+        <ul class="player_content">  
             <!-- <li> Player Id: {{ id }}</li> -->
             <li> Team: {{ teamName }}</li>
             <li> Position: {{ playerPos }}</li>     
@@ -76,10 +68,11 @@ export default {
 </script>
 
 <style>
-.container{
-    width: 50%;
+.container_player{
+    width: 22%;
+    margin: 7px;
 }
-.game-content{
+.player_content{
     list-style-type: none;
      padding: 0; /* Remove padding */
   margin: 0; /* Remove margins */

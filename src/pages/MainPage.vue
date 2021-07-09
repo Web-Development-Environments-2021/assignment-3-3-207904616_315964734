@@ -4,12 +4,17 @@
     <h1 class="title">Welcome To the Superliga</h1>
     </center>
     <div class="row">
-      <div class="column">
+      
+      <div class="column-main">
+      
     <LeagueInfo></LeagueInfo>
+     
      </div>
-      <div class="column">
+      <div class="column-main">
+       
     <LoginPage v-if="!$root.store.username"></LoginPage>
     <FavoriteGames v-else></FavoriteGames>
+   
       </div>
     </div>
   </div>
@@ -46,7 +51,7 @@ export default {
   flex-wrap: wrap;
   width: 100%;
 }
-.column {
+.column-main {
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
@@ -59,4 +64,5 @@ export default {
 .title{
   color: #1e311b; font-family: 'Lato', sans-serif; font-size: 54px; font-weight: 300; line-height: 58px; margin: 20px 20px 58px;
 }
+
 </style>

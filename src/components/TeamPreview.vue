@@ -1,4 +1,6 @@
 <template>
+  <div class="team_content">
+
   <b-card
     :title= "teamName"
     :img-src= "imageUrl"
@@ -9,13 +11,14 @@
     class="mb-2"
   >
     <b-card-text>
-        <ul class="game-content">              
+        <ul >              
             <!-- <li> Team Id: {{ teamId }}</li>                -->
         </ul> 
     </b-card-text>
 
     <!-- <b-button href="#" variant="primary">for games</b-button> -->
   </b-card>
+  </div>
 </template>
 
 <script>
@@ -38,6 +41,9 @@ export default {
 </script>
 
 <style>
-
+.team_content{
+  width: 30%;
+  margin: 8px;
+}
 
 </style>

@@ -1,8 +1,7 @@
 <template>
   <div>
     <center>
-    <h2 class="title">{{$root.store.username.toUpperCase()}}, Your Upcoming Favorites Games</h2>
-    </center>
+    <h2 class="title">{{$root.store.username.toUpperCase()}}, Here is Your Upcoming Favorites Games</h2>
     <br/>
     <GamePreview
       v-for="g in favGames"
@@ -12,6 +11,7 @@
       :date_time="g.date_time"
       :stadium="g.stadium" 
       :key="g.game_id"></GamePreview>
+    </center>
   </div>
 </template>
 

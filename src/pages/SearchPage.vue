@@ -17,14 +17,17 @@
       <br/>
       <!-- Your search Query: {{ searchQuery }} -->
       <br/> 
-      <div class="container">
+      <div class="container_search">
         <div class="row">
-      <div id="teamsDisplay" class="teamClass column">        
+      <div id="teamsDisplay" class="column">        
       <h3>Teams</h3>      
         <!-- <h5>Results: {{resultsTeams}}</h5> -->
         <br/>
+        <div class="teamclass">
+
         <TeamPreview v-for="team in filterTeamsByTeamName" :key="team.id"
         :teamId="team.id" :teamName="team.name" :imageUrl="team.imageUrl"></TeamPreview>
+        </div>
       </div>
       <br/> <br/>
           
@@ -203,9 +206,10 @@ export default {
 
   /* text-align: center */
 }
-.container{
+.container_search{
   margin: auto;
-  
+  margin: 20px;
+  align-items: center;
 
 }
 .row {
@@ -233,5 +237,11 @@ export default {
 }
 .box{
   margin-top: 30px;
+}
+.teamclass{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 }
 </style>

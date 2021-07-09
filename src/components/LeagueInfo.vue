@@ -1,5 +1,8 @@
 <template>
     <div class="league-preview">
+    <div class="centerLeague">
+      <center>
+
       <b-card
       img-alt="Image"
       img-src="/Superliga.png"
@@ -14,14 +17,33 @@
         <br/>
         <br/>
         Stage: {{ stage }}
+        <br/>
+        <br/>
+        Next Game
+        
       </b-card-title>
       <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
     </b-card>
+      </center>
+    </div>
+
+    <GamePreview
+          :game_id="nextGame.game_id" 
+          :home_team_id="nextGame.home_team_id" 
+          :away_team_id="nextGame.away_team_id" 
+          :date_time="nextGame.date_time"
+          :stadium="nextGame.stadium" 
+          ></GamePreview>
   </div>
 </template>
 
 <script>
+import GamePreview from "./GamePreview.vue";
+
 export default {
+  components: {
+    GamePreview
+  },
  data() {
     return {
       info: JSON.parse(localStorage.getItem('leagueDetails')),
@@ -36,6 +58,11 @@ export default {
     },
     stage(){
       return this.info.current_stage_name
+    },
+    nextGame(){
+      console.log(this.info.next_match_details)
+      return this.info.next_match_details
+
     }
   }
 }
@@ -52,7 +79,7 @@ export default {
   border-radius: 10px;
   border-width: 5px; */
   /* border-color:rgb(44, 89, 116); */
-  text-align: center;
+
 }
 
 .league-preview .league-title {
@@ -65,5 +92,10 @@ export default {
   width: 100%;
   overflow: hidden;
 }
+.centerLeague {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  }
 
 </style>
