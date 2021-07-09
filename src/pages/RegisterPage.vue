@@ -41,6 +41,28 @@
           Country is required
         </b-form-invalid-feedback>
       </b-form-group>
+     
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email"
+        
+      >
+        <b-form-input
+          id="email"
+          v-model="$v.form.email.$model"
+          type="text" 
+          :state="validateState('email')"         
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          Email is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-else-if="!$v.form.email.email">
+          Email must have right format
+        </b-form-invalid-feedback>        
+      </b-form-group>
+
 
       <b-form-group
         id="input-group-Password"
@@ -90,10 +112,10 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button type="reset" variant="secondary">Reset</b-button>
       <b-button
         type="submit"
-        variant="primary"
+        variant="success"
         style="width:250px;"
         class="ml-5 w-75"
         >Register</b-button
@@ -166,6 +188,10 @@ export default {
       confirmedPassword: {
         required,
         sameAsPassword: sameAs("password")
+      },
+      email: {
+        required,
+        email
       }
     }
   },
@@ -181,13 +207,25 @@ export default {
     },
     async Register() {
       try {
-        const response = await this.axios.post(
-          "https://test-for-3-2.herokuapp.com/user/Register",
-          {
-            username: this.form.username,
-            password: this.form.password
-          }
-        );
+        const response = await this.axios.post("http://localhost:3000/auth/register",
+        {
+          username: this.form.username,         
+          firstname: this.form.firstName,
+          lastName: this.form.lastName,
+          country: this.form.country,
+          password: this.form.password,
+          email: this.form.email,
+          // imageUrl: this.form.
+
+        })
+
+        // const response2 = await this.axios.post(
+        //   "https://test-for-3-2.herokuapp.com/user/Register",
+        //   {
+        //     username: this.form.username,
+        //     password: this.form.password
+        //   }
+        // );
         this.$router.push("/login");
         // console.log(response);
       } catch (err) {

@@ -108,6 +108,16 @@ new Vue({
    
     },
 
+    async getLeagueDetails(){
+      const response = await this.axios.get("http://localhost:3000/league/getDetails")           
+      localStorage.setItem('leagueDetails', JSON.stringify(response.data));
+    },
+
+    async getCurStage(){
+      const response = await this.axios.get("http://localhost:3000/league/getCurStage")           
+      localStorage.setItem('curStage', JSON.stringify(response.data));
+    },    
+
     toast(title, content, variant = null, append = false) {
       this.$bvToast.toast(`${content}`, {
         title: `${title}`,
@@ -124,7 +134,9 @@ new Vue({
   created(){
     console.log("app created")
     this.getAllPlayers(), 
-    this.getAllTeams()
+    this.getAllTeams(),
+    this.getCurStage(),
+    this.getLeagueDetails()
   },
 
   render: (h) => h(App),
