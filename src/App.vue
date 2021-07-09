@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" style="background-color: #009E60" >
-      <img src="/Superliga.png" height="50" style="padding: 1px">
-      <b-navbar-brand :to="{ name: 'main' }" style="padding-left: 15px">Superliga Home</b-navbar-brand>
+    <b-navbar toggleable="lg" type="dark" style="background-color: #009E60; padding-top: 12px" >
+      <img src="/12.png" height="45" style="padding-left: 5px; padding: 1px; margin-top: -10px; margin-right: 10px; cursor: pointer;" @click="gotoHome()">
+      <!-- <b-navbar-brand :to="{ name: 'main' }" style="padding-left: 20px; margin-top: -4px">Superliga Home</b-navbar-brand> -->
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
 
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
+        <b-nav-item :to="{ name: 'search' }">Games</b-nav-item>
+        <b-nav-item :to="{ name: 'search' }">About</b-nav-item>
+
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
           <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
@@ -40,6 +43,11 @@ export default {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
+    },
+    gotoHome(){
+        this.$router.push("/").catch(() => {
+        this.$forceUpdate();
+      });
     }
   }
 };
@@ -62,11 +70,17 @@ export default {
 
 #nav a {
   font-weight: bold;
-  // color: #2c3e50;
-  color: white;
+  color: #2c3e50;
+  // color: white;
 }
 
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.nav-item li a{
+  color: #42b983 !important;
+  }
+
+
 </style>
