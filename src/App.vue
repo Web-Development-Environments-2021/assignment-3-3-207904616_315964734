@@ -7,7 +7,7 @@
         <b-navbar-nav>
 
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
-        <b-nav-item :to="{ name: 'search' }">Games</b-nav-item>
+        <b-nav-item :to="{ name: 'games' }">Games</b-nav-item>
         <b-nav-item :to="{ name: 'search' }">About</b-nav-item>
 
         </b-navbar-nav>
