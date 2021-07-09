@@ -2,17 +2,20 @@
     <div class="league-preview">
       <b-card
       img-alt="Image"
+      img-src="/Superliga.png"
       tag="article"
       style="max-width: 20rem;"
       class="mb-2"
     >
-      <b-card-title>{{leagueName}}</b-card-title>
-      <b-card-text>
+      <!-- <b-card-title>{{leagueName}}</b-card-title> -->
+      <b-card-title >
+        <br/>
         Season: {{ season }}
         <br/>
+        <br/>
         Stage: {{ stage }}
-      </b-card-text>
-      <b-button href="#" variant="primary">Go somewhere</b-button>
+      </b-card-title>
+      <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
     </b-card>
   </div>
 </template>
@@ -21,25 +24,35 @@
 export default {
  data() {
     return {
-      leagueName: "superliga", 
-      season: "season", 
-      stage: "stage"
+      info: JSON.parse(localStorage.getItem('leagueDetails')),
     };
   },
+  computed:{
+    leagueName(){
+      return this.info.league_name
+    },
+    season(){
+      return this.info.current_season_name
+    },
+    stage(){
+      return this.info.current_stage_name
+    }
+  }
 }
 </script>
 
 <style>
 .league-preview {
   display: inline-block;
-  width: 250px;
-  height: 200px;
+  width: 350px;
+  height: 500px;
   position: relative;
   margin: 10px 10px;
-  border-style: solid;
+  /* border-style: solid;
   border-radius: 10px;
-  border-width: 5px;
-  border-color:rgb(44, 89, 116);
+  border-width: 5px; */
+  /* border-color:rgb(44, 89, 116); */
+  text-align: center;
 }
 
 .league-preview .league-title {

@@ -24,7 +24,7 @@ export default {
   },
   data(){
     return {
-      favGames: this.favGames
+      favGames: []
     }
   } ,
   // data () {
@@ -48,7 +48,7 @@ export default {
   // },
   methods: {
     async updateGames(){
-      console.log("response");
+      // console.log("response");
       try {
         const response = await this.axios.get(
           "http://localhost:3000/favorites/getGames",
@@ -56,10 +56,10 @@ export default {
         const games = response.data;
         this.favGames = [];
         this.favGames.push(...games);
-        console.log(response.data);
-        console.log("done");
+        // console.log(response.data);
+        // console.log("done");
       } catch (error) {
-        console.log("error in update games")
+        // console.log("error in update games")
         console.log(error);
       }
     }
@@ -67,8 +67,15 @@ export default {
   mounted(){
     console.log("favorite games mounted");
     this.updateGames(); 
+  },
+  computed:{
+
   }
+  
 };
 </script>
 
-<style></style>
+<style>
+
+
+</style>
