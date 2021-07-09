@@ -24,8 +24,6 @@
       </b-card-title>
       <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
     </b-card>
-      </center>
-    </div>
 
     <GamePreview
           :game_id="nextGame.game_id" 
@@ -34,6 +32,8 @@
           :date_time="nextGame.date_time"
           :stadium="nextGame.stadium" 
           ></GamePreview>
+      </center>
+    </div>
   </div>
 </template>
 

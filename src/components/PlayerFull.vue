@@ -1,14 +1,10 @@
 <template>
- <!-- <div class="card" style="width: 18rem;">
-    <ul class="game-content">
-      <li> Pic: {{imageUrl}}</li>
-      <li>Player Name: {{playerName}} </li>
-      <li> Player Id: {{ id }}</li>
-      <li> Team: {{ teamName }}</li>
-      <li> Position Id: {{ position }}</li>     
-    </ul> 
-</div> -->
-<div class="container">
+
+<div class="container-player-full">
+    <div class="row">
+      <div class="column">
+
+    
   <b-card
     :title= "playerName"
     :img-src= "imageUrl"
@@ -18,17 +14,25 @@
     style="max-width: 20rem;"
     class="mb-2"
    
-  >
+  ></b-card>
+  </div>
+   <div class="column">
     <b-card-text>
         <ul class="player-content">  
             <!-- <li> Player Id: {{ id }}</li> -->
-            <li> Team: {{ teamName }}</li>
-            <li> Position: {{ playerPos }}</li>     
+            <li v-if="teamName"> Team: {{ teamName }}</li>
+            <li v-if="playerPos"> Position: {{ playerPos }}</li>  
+            <li v-if="common_name"> Common name: {{common_name}}</li>
+            <li v-if="nationality"> Nationality: {{nationality}}</li>
+            <li v-if="birthDate"> Birth Date: {{birthDate}}</li>
+            <li v-if="birthCountry"> Birth Country: {{birthCountry}}</li> 
+            <li v-if="height"> height: {{height}}</li>
+            <li v-if="weight"> weight: {{weight}}</li>
         </ul> 
     </b-card-text>
-
+    </div>
+    </div>
     <!-- <b-button href="#" variant="primary">for more details</b-button> -->
-  </b-card>
 </div>
 </template>
 
@@ -55,6 +59,30 @@ export default {
         position:{
             type: Number,
             // required:true
+        },
+        common_name:{
+            type: String,
+            // required: true
+        },
+        nationality:{
+            type: String,
+            // required: true
+        },
+        birthDate:{
+            type: Number,
+            // required:true
+        },
+        birthCountry:{
+            type: String,
+            // required: true
+        },
+        height:{
+            type: String,
+            // required: true
+        },
+        weight:{
+            type: String,
+            // required:true
         }
     },
     data() {
@@ -76,12 +104,29 @@ export default {
 </script>
 
 <style>
-.container{
-    width: 50%;
+.container-player-full{
+    width: 100%;
 }
 .player-content{
-list-style-type: none;
-padding: 0; /* Remove padding */
-  margin: 0; /* Remove margins */
+    list-style-type: none;
+    padding: 20px; 
+    margin: 10px;
+    color: #1e311b; 
+    font-family: 'Lato', sans-serif; 
+    font-size: 20px; 
+    line-height: 35px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-login">
     <h1 class="title">Login</h1>
     <b-form @submit.prevent="onLogin">
       <b-form-group
@@ -127,7 +127,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container {
+.container-login {
   max-width: 400px;
+  margin: auto;
+  margin-top: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
 }
 </style>

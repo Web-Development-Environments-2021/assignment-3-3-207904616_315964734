@@ -8,17 +8,17 @@
     <div class="game-content">
       <div class="row">
       <div class="column">
-      Home Team: {{ homeTeamName }}
+      Home Team 
       <img :src= this.homeTeamURL class="center">
-
+      {{ homeTeamName }}
       </div>
       <div class="column">
-      Away Team: {{ awayTeamName }}
+      Away Team 
       <img :src= this.awayTeamURL class="center">
+      {{ awayTeamName }}
       </div>
       </div>
 
-      <br/>
       
       <li>Game Id: {{ game_id }}</li>
       <li> Time: {{ time }}</li>

@@ -8,7 +8,8 @@
 
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
         <b-nav-item :to="{ name: 'search' }">Games</b-nav-item>
-        <b-nav-item :to="{ name: 'search' }">About</b-nav-item>
+        <b-nav-item v-b-modal.about>About</b-nav-item>
+  <!-- <b-button v-b-modal.modal-1>Launch demo modal</b-button> -->
 
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
@@ -27,6 +28,13 @@
       </b-collapse>
     </b-navbar>
     <router-view />
+
+    <b-modal id="about" title="About Us">
+    <p class="my-4">Hello, We are Omer Tagger and Omer Niv</p>
+    <p class="my-4">You can see our work here</p>
+  </b-modal>
+
+
   </div>
 </template>
 

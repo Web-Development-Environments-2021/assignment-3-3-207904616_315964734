@@ -10,8 +10,9 @@
         <b-form-select v-model="selected" :options="options"></b-form-select>
         <b-form-select v-model="selectedTeam" :options="teamNames"></b-form-select>
         <b-form-select v-model="selectedPosition" :options="positionList"></b-form-select>
+          <b-button v-b-modal.modal-1>modal</b-button>
 
-      </b-input-group-append>
+          </b-input-group-append>
     </b-input-group>
     </center>
       <br/>
@@ -33,7 +34,6 @@
           
       <div id ="playersDisplay" class="column"> 
       <h3>Players</h3>
-        <!-- <h5>Results: {{resultsPlayers}}</h5>   -->
             <br/>
         <div class="playerclass">
         <PlayerPreview v-for="player in filterPlayerbyPosition" :key="player.id"
@@ -47,10 +47,29 @@
       </div>
       </div>
     
+
+  <b-modal id="modal-1" title="Player Card" size="lg">
+    <PlayerFull
+    :id="this.playerClicked.id"
+    :playerName="this.playerClicked.name"
+    :teamName="this.playerClicked.team_name"
+    :position="this.playerClicked.position_id"
+    :common_name="this.playerClicked.common_name"
+    :nationality="this.playerClicked.nationality"
+    :birthCountry="this.playerClicked.birthcountry"
+    :birthDate="this.playerClicked.birthdate"
+    :height="this.playerClicked.height"
+    :weight="this.playerClicked.weight"       
+    :imageUrl="this.playerClicked.imageUrl"
+    ></PlayerFull>
+  </b-modal>
+
+
   </div>
 </template>
 
 <script>
+import PlayerFull from '../components/PlayerFull.vue';
 import PlayerPreview from '../components/PlayerPreview.vue'
 import TeamPreview from "../components/TeamPreview.vue";
 
@@ -58,7 +77,8 @@ export default {
  
  components:{   
   PlayerPreview: PlayerPreview,
-  TeamPreview: TeamPreview
+  TeamPreview: TeamPreview,
+  PlayerFull: PlayerFull
  },
 
  data() {
@@ -88,7 +108,7 @@ export default {
             "Striker"
         ],
       sortedAndFilteredTeams: JSON.parse(localStorage.getItem('allTeams')),
-      lastSearchQuery: ""
+      lastSearchQuery: "",
     };
   },
   computed:{
@@ -148,9 +168,13 @@ export default {
       } 
       
       return this.filterPlayersByTeamName 
+    },
+    playerClicked(){
+      return this.filterPlayerbyPosition[4]
     }
-  },
+    },
   methods:{
+
     searchTeamAndPlayers(){
       this.relevantTeams = []
       this.relevantPlayers = []
@@ -244,4 +268,5 @@ export default {
   flex-wrap: wrap;
   width: 100%;
 }
+
 </style>
