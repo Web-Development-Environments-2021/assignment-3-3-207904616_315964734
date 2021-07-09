@@ -7,9 +7,10 @@
         <b-navbar-nav>
 
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
-        <b-nav-item :to="{ name: 'search' }">Games</b-nav-item>
+        <b-nav-item :to="{ name: 'games' }">Games</b-nav-item>
         <b-nav-item v-b-modal.about>About</b-nav-item>
   <!-- <b-button v-b-modal.modal-1>Launch demo modal</b-button> -->
+
 
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="!$root.store.username">

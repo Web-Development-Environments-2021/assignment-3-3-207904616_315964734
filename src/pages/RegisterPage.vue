@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-register">
     <h1 class="title">Register</h1>
     <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
       <b-form-group
@@ -215,7 +215,7 @@ export default {
           country: this.form.country,
           password: this.form.password,
           email: this.form.email,
-          // imageUrl: this.form.
+          imageUrl: null
 
         })
 
@@ -260,7 +260,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container {
+.container-register {
   max-width: 500px;
+  margin: auto;
+  margin-top: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
 }
 </style>
