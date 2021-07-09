@@ -23,7 +23,8 @@
       <li>Game Id: {{ game_id }}</li>
       <li> Time: {{ time }}</li>
       <li> Date: {{ date }}</li>
-      <li> Stadium: {{ stadium }}</li>
+      <li> Stadium: {{ stadium }}</li><br/>
+      <b-button variant="success" v-if="$root.store.username">Add To Favorites</b-button>
       
     </div>
       </center>
@@ -101,7 +102,7 @@ export default {
 .game-preview {
   display: inline-block;
   width: 470px;
-  height: 280px;
+  height: 340px;
   position: relative;
   margin: 10px 10px;
   border-style: solid;
