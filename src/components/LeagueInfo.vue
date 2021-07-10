@@ -1,13 +1,14 @@
 <template>
     <div class="league-preview">
     <div class="centerLeague">
-      <center>
+      <div class="row">
 
+      <center>
       <b-card
       img-alt="Image"
       img-src="/Superliga.png"
       tag="article"
-      style="max-width: 20rem;"
+      style="max-width: 17rem; border: none"
       class="mb-2"
     >
       <!-- <b-card-title>{{leagueName}}</b-card-title> -->
@@ -33,6 +34,7 @@
           :stadium="nextGame.stadium" 
           ></GamePreview>
       </center>
+      </div>
     </div>
   </div>
 </template>

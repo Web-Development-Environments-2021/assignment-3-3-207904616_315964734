@@ -28,9 +28,14 @@ const routes = [
     component: NotFound
   },
   {
-    path: "/gamesInStage",
+    path: "/games",
     name: "games",
     component: () => import("./pages/CurStage")
+  },
+  {
+    path: "/favorites",
+    name: "favorites",
+    component: () => import("./pages/FavoritesPage")
   }
 ];
 

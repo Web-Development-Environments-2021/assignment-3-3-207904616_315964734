@@ -10,7 +10,7 @@
         <b-form-select v-model="selected" :options="options"></b-form-select>
         <b-form-select v-model="selectedTeam" :options="teamNames"></b-form-select>
         <b-form-select v-model="selectedPosition" :options="positionList"></b-form-select>
-          <b-button v-b-modal.modal-1>modal</b-button>
+          <b-button v-b-modal.modal-player>modal</b-button>
 
           </b-input-group-append>
     </b-input-group>
@@ -21,10 +21,11 @@
       <div class="container_search">
         <div class="row">
       <div id="teamsDisplay" class="column">        
-      <h3>Teams</h3>      
+      <center><h3>Teams</h3></center>      
         <!-- <h5>Results: {{resultsTeams}}</h5> -->
         <br/>
         <div class="teamclass">
+        <div v-if="zeroTeams"><center><h2 >No Result</h2></center></div>
 
         <TeamPreview v-for="team in filterTeamsByTeamName" :key="team.id"
         :teamId="team.id" :teamName="team.name" :imageUrl="team.imageUrl"></TeamPreview>
@@ -33,22 +34,25 @@
       <br/> <br/>
           
       <div id ="playersDisplay" class="column"> 
-      <h3>Players</h3>
+      <center><h3>Players</h3></center>
             <br/>
         <div class="playerclass">
+
+        <div v-if="zeroPlayers"><center><h2 >No Result</h2></center></div>
+
         <PlayerPreview v-for="player in filterPlayerbyPosition" :key="player.id"
           :id="player.id"
           :playerName="player.name"
           :teamName="player.team_name"
           :position="player.position_id"
-          :imageUrl="player.imageUrl"></PlayerPreview>        
+          :imageUrl="player.imageUrl" ></PlayerPreview>        
           </div>         
         </div>
       </div>
       </div>
     
 
-  <b-modal id="modal-1" title="Player Card" size="lg">
+  <b-modal id="modal-player" title="Player Card" size="lg" hide-footer="true">
     <PlayerFull
     :id="this.playerClicked.id"
     :playerName="this.playerClicked.name"
@@ -170,7 +174,15 @@ export default {
       return this.filterPlayersByTeamName 
     },
     playerClicked(){
-      return this.filterPlayerbyPosition[4]
+      return this.allPlayers[0]
+    },
+    zeroTeams(){
+      if (this.filterTeamsByTeamName.length == 0) return true 
+      return false
+    },
+    zeroPlayers(){
+    if (this.filterPlayerbyPosition.length == 0) return true 
+      return false
     }
     },
   methods:{

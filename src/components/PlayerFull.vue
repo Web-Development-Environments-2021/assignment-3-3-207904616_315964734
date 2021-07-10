@@ -11,7 +11,7 @@
     img-alt="Image"
     img-top
     tag="article"
-    style="max-width: 20rem;"
+    style="max-width: 20rem; text-align: center;"
     class="mb-2"
    
   ></b-card>
@@ -26,8 +26,8 @@
             <li v-if="nationality"> Nationality: {{nationality}}</li>
             <li v-if="birthDate"> Birth Date: {{birthDate}}</li>
             <li v-if="birthCountry"> Birth Country: {{birthCountry}}</li> 
-            <li v-if="height"> height: {{height}}</li>
-            <li v-if="weight"> weight: {{weight}}</li>
+            <li v-if="height"> height: {{height}} cm</li>
+            <li v-if="weight"> weight: {{weight}} kg</li>
         </ul> 
     </b-card-text>
     </div>
@@ -115,6 +115,7 @@ export default {
     font-family: 'Lato', sans-serif; 
     font-size: 20px; 
     line-height: 35px;
+    
 }
 .row {
   display: flex;

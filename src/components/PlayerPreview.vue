@@ -1,5 +1,4 @@
 <template>
-
 <div class="container_player">
   <b-card
     :title= "playerName"
@@ -7,15 +6,17 @@
     img-alt="Image"
     img-top
     tag="article"
-    style="max-width: 20rem;"
+    style="max-width: 20rem; cursor: pointer;"
     class="mb-2"
+    
    
   >
+  
     <b-card-text>
-        <ul class="player_content">  
+        <ul class="player_content" >  
             <!-- <li> Player Id: {{ id }}</li> -->
-            <li> Team: {{ teamName }}</li>
-            <li> Position: {{ playerPos }}</li>     
+            <li> Team <b>{{ teamName }}</b></li>
+            <li> Position <b>{{ playerPos }}</b></li>     
         </ul> 
     </b-card-text>
 
@@ -75,6 +76,7 @@ export default {
 .player_content{
     list-style-type: none;
      padding: 0; /* Remove padding */
-  margin: 0; /* Remove margins */
+     margin: 0; /* Remove margins */
+  
 }
 </style>

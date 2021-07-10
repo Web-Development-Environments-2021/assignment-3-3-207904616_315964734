@@ -9,7 +9,6 @@
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
         <b-nav-item :to="{ name: 'games' }">Games</b-nav-item>
         <b-nav-item v-b-modal.about>About</b-nav-item>
-  <!-- <b-button v-b-modal.modal-1>Launch demo modal</b-button> -->
 
 
         </b-navbar-nav>
@@ -22,7 +21,7 @@
           <template #button-content>
             Welcome {{$root.store.username}}
           </template>
-          <b-dropdown-item href="#">Favorites</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'favorites' }">Favorites</b-dropdown-item>
           <b-dropdown-item href="#" @click="Logout()">Log Out</b-dropdown-item>
         </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -30,9 +29,15 @@
     </b-navbar>
     <router-view />
 
-    <b-modal id="about" title="About Us">
-    <p class="my-4">Hello, We are Omer Tagger and Omer Niv</p>
-    <p class="my-4">You can see our work here</p>
+    <b-modal id="about" title="About Us" hide-footer="true">
+    <center>
+    <p class="my-2">Hey! Nice to Meet You!</p>
+    <p class="my-3">We are Omer Tagger and Omer Niv</p>
+    <p class="my-3">You can find our SERVER source code <a href="https://github.com/Web-Development-Environments-2021/assignment-3-2-207904616_315964734" target="_blank">Here</a></p>
+    <p class="my-3">If you like to play PAC-MAN, you can join us<a href="https://web-development-environments-2021.github.io/Assignment2_207904616_315964734/" target="_blank"> Here</a></p>
+    <p class="my-3">You can Listen to Meir Banai With OMER TAGGER <a href="https://web-development-environments-2021.github.io/207904616/" target="_blank">Here</a></p>
+    <p class="my-3">Or Listen to Shalom Hanoch With OMER NIV <a href="https://web-development-environments-2021.github.io/315964734/" target="_blank">Here</a></p>
+    </center>  
   </b-modal>
 
 

@@ -23,8 +23,8 @@
       <li>Game Id: {{ game_id }}</li>
       <li> Time: {{ time }}</li>
       <li> Date: {{ date }}</li>
-      <li> Stadium: {{ stadium }}</li><br/>
-      <b-button variant="success" v-if="$root.store.username">Add To Favorites</b-button>
+      <li> Stadium: {{ stadium }}</li>
+      <b-button variant="success" v-if="$root.store.username && alreadyFav" style="margin: 10px;"> Add To Favorites</b-button>
       
     </div>
       </center>
@@ -92,6 +92,11 @@ export default {
     },
     awayTeamURL(){
       return this.allTeams.filter(team => team.id == this.away_team_id)[0].imageUrl
+    },
+    alreadyFav(){
+      // if (!$root.store.username) return false
+      // console.log($FavoriteGames.favGames)
+      return true
     }
   }
 
@@ -102,7 +107,7 @@ export default {
 .game-preview {
   display: inline-block;
   width: 470px;
-  height: 340px;
+  height: auto;
   position: relative;
   margin: 10px 10px;
   border-style: solid;

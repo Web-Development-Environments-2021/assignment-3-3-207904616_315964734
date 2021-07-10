@@ -141,7 +141,7 @@ export default {
 .game-preview-pastGame {
   display: inline-block;
   width: 450px;
-  height: 850px;
+  height: auto;
   position: relative;
   margin: 10px 10px;
   border-style: solid;
