@@ -24,7 +24,9 @@
       <li> Time: {{ time }}</li>
       <li> Date: {{ date }}</li>
       <li> Stadium: {{ stadium }}</li>
-      <b-button variant="success" v-if="$root.store.username && alreadyFav" style="margin: 10px;"> Add To Favorites</b-button>
+      <b-button variant="success" @click="addGameToFavorites" v-if="$root.store.username && alreadyFav" style="margin: 10px;"> Add To Favorites</b-button>
+      <b-button variant="danger" @click="removeGameFromFavorites" v-if="$root.store.username && alreadyFav" style="margin: 10px;"> Remove From Favorites</b-button>
+
       
     </div>
       </center>
@@ -98,6 +100,37 @@ export default {
       // console.log($FavoriteGames.favGames)
       return true
     }
+  },
+  methods:{
+    async addGameToFavorites(){
+      try{
+        const response = await this.axios.post(
+          "http://localhost:3000/favorites/addGame",
+          {
+            id: this.game_id
+          }
+        );
+        this.$root.toast("Games added Successfully", "Please see Favorites Page", "success");
+      }
+      catch{
+        this.$root.toast("Something went Wrong", "Game already in favorite list or Please try again in few seconds", "danger");
+      }
+    },
+    async removeGameFromFavorites(){
+      try{
+        const response = await this.axios.post(
+          "http://localhost:3000/favorites/delGame",
+          {
+            id: this.game_id
+          }
+        );
+        this.$root.toast("Games Removed Successfully", "Please see Favorites Page", "success");
+      }
+      catch{
+        this.$root.toast("Something went Wrong", "Game already in Removed or Please try again in few seconds", "danger");
+      }
+    }
+  
   }
 
 };

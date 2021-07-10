@@ -1,6 +1,6 @@
 <template>
 <div class="container_player">
-  <b-card
+  <b-card v-on:click="openModal"
     :title= "playerName"
     :img-src= "imageUrl"
     img-alt="Image"
@@ -63,6 +63,14 @@ export default {
     computed:{
         playerPos(){
             return this.positionList[this.position -1]
+        }
+    },
+    methods:
+    {
+        openModal(){
+            this.$router.push("/").catch(() => {
+        this.$forceUpdate();
+      }); 
         }
     }
 }

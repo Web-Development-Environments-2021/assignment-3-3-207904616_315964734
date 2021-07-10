@@ -27,24 +27,25 @@
       <li>Home Team Goals: {{home_goals}}</li>
       <li>Away Team Goals: {{away_goals}} </li>
       <li>Winner Team: {{winnerTeamName}}</li>
-      <li><b>Events</b></li>
+      <li v-if="events.length > 0"><b>Events</b></li>
       <!-- <li v-for="e in events" :key="e.id">
         <b>Event id:</b> {{e.event_id}} <br/>
         Date_time: {{e.date_time}} <br/>
         Minute: {{e.minute}} <br/>
         Description: {{e.description}} <br/>
       </li> -->
-        <div class="container">
-        <div class="row">
-      <ul class="events-display "><li v-for="e in events" :key="e.id">
+        <div class="event-container">
+          
+      <ul class="events-display row"><li v-for="e in events" :key="e.id">
+        <div class="column">
         <Event :id="e.event_id"
             :date_time="e.date_time"
             :minute="e.minute"
             :description="e.description"      
         ></Event>
-        <br/>
+        </div>
       </li></ul>
-      </div>
+      
     </div>
 
     </div>
@@ -175,6 +176,7 @@ export default {
 
 .events-display{
   list-style-type: none;
+  padding: 0;
 }
 
 .row {
@@ -196,6 +198,12 @@ export default {
   margin-right: auto;
   width: 85px;
   margin-top: 5px;
+}
+
+.event-container{
+  margin: 0px;
+  align-items: center;
+
 }
 
 </style>

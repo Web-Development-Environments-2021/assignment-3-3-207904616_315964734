@@ -36,6 +36,11 @@ const routes = [
     path: "/favorites",
     name: "favorites",
     component: () => import("./pages/FavoritesPage")
+  },
+  {
+    path: "/team",
+    name: "team",
+    component: () => import("./pages/TeamPage")
   }
 ];
 

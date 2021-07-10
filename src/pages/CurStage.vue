@@ -1,5 +1,6 @@
 <template>
   <div>
+    <center>
       <div id="futureGames">
         <br/><center>  <h4>Future Games</h4> </center> <br/>
           <GamePreview v-for="g in futureGames" :key="g.game_id"
@@ -28,7 +29,7 @@
 
 
     </div>
-
+</center>
 
   </div>
 </template>
@@ -56,5 +57,9 @@ export default {
 </script>
 
 <style>
+.pastGames{
+  display: flex;
+  align-items: flex-start
 
+}
 </style>

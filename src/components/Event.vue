@@ -46,16 +46,18 @@ export default {
 <style>
 .container-event-details{
     list-style-type: none;
-    width:25%
+    width: 30%;
+    margin: 5px;
 }
 .event-properties{    
-    border-radius: 25px;
+    border-radius: 15px;
     border: 2px solid #A8A8A8;
-    padding: 20px; 
-    width: 200px;
-    height: 140px;    
+    padding: 5px; 
+    width: 130px;
+    height: auto;    
     list-style-type: none; 
-    font-size: 13px;
+    font-size: 11px;
+    margin: 0;
 }
 
 </style>

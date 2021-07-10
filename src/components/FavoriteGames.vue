@@ -68,7 +68,7 @@ export default {
     console.log("favorite games mounted");
     this.updateGames(); 
   },
-  computed:{
+  Computed:{
 
   }
   

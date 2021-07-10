@@ -1,7 +1,7 @@
 <template>
   <div class="team_content">
 
-  <b-card
+  <b-card  v-on:click="openTeamPage"
     :title= "teamName"
     :img-src= "imageUrl"
     img-alt="Image"
@@ -30,7 +30,18 @@ export default {
       imageUrl:{
           type: String
       }
-  }, 
+  },
+   data(){
+    return {}},
+
+  methods:{
+    openTeamPage(){
+    this.$router.push("/team").catch(() => {
+        this.$forceUpdate();
+      });    
+  },
+  
+}
 }
 </script>
 
