@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import {bus} from "../main";
+
 export default {
   data(){
     return {
@@ -74,7 +76,13 @@ export default {
         type: Number
       }
  
-  }, 
+  },
+  created(){
+      bus.$on("favoritesChanged", (data) => {
+        // console.log("we are on fire !")
+        this.add = !this.add
+    })
+  } ,
   mounted(){
     // console.log("game preview mounted")
     if (this.$root.store.favorites){
@@ -124,6 +132,8 @@ export default {
         );
         this.$root.toast("Games added Successfully", "For more information Please see Favorites Page", "success");
         this.$emit("updateGamesHere")
+        bus.$emit("favoritesChanged", "hello fired" )
+
         this.add = false
 
       }
@@ -141,6 +151,7 @@ export default {
         );
         this.$root.toast("Games Removed Successfully", "Please see Favorites Page", "success");
         this.$emit("updateGamesHere")
+        bus.$emit("favoritesChanged", "hello fired" )
         this.add = true
       }
       catch{
