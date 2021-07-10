@@ -63,7 +63,7 @@ export default {
       return this.info.current_stage_name
     },
     nextGame(){
-      console.log(this.info.next_match_details)
+      // console.log(this.info.next_match_details)
       return this.info.next_match_details
 
     }
