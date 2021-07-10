@@ -24,8 +24,8 @@
       <li> Time: {{ time }}</li>
       <li> Date: {{ date }}</li>
       <li> Stadium: {{ stadium }}</li>
-      <b-button variant="success" @click="addGameToFavorites" v-if="$root.store.username && this.add " style="margin: 10px;"> Add To Favorites</b-button>
-      <b-button variant="danger" @click="removeGameFromFavorites" v-if="$root.store.username && !this.add " style="margin: 10px;"> Remove From Favorites</b-button>
+      <b-button variant="success" @click="addGameToFavorites" v-if="$root.store.username && addButtom " style="margin: 10px;"> Add To Favorites</b-button>
+      <b-button variant="danger" @click="removeGameFromFavorites" v-if="$root.store.username && !addButtom " style="margin: 10px;"> Remove From Favorites</b-button>
 
       
     </div>
@@ -79,9 +79,7 @@ export default {
   },
   created(){
       bus.$on("favoritesChanged", (data) => {
-        // console.log("we are on fire !")
-        if (date == "added") this.add = false
-        else this.add = true
+        this.addButtom
     })
   } ,
   mounted(){
@@ -109,6 +107,10 @@ export default {
     awayTeamURL(){
       return this.allTeams.filter(team => team.id == this.away_team_id)[0].imageUrl
     },
+    addButtom(){
+      if (this.add) return true
+      return false
+    }
     // alreadyFav(){
     //   if (this.$root.store.favorites){
     //       if (this.$root.store.favorites.find(game => game.game_id == this.game_id)){
@@ -136,6 +138,7 @@ export default {
         bus.$emit("favoritesChanged", "added" )
 
         this.add = false
+        
 
       }
       catch{
