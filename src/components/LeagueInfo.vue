@@ -41,6 +41,7 @@
 
 <script>
 import GamePreview from "./GamePreview.vue";
+import {bus} from "../main"
 
 export default {
   components: {
@@ -70,7 +71,17 @@ export default {
   methods:{
     fireUpEvent(){
       this.$emit("updateGamesHere")
+    },
+    async loadLeagueDetailsAgain(){
+      const response = await this.axios.get("http://localhost:3000/league/getDetails")
+      this.info = response.data 
     }
+  },
+  created(){
+    bus.$on("updateGamesInCurStage", (data) => {
+      this.loadLeagueDetailsAgain();
+    })
+    
   }
 }
 </script>

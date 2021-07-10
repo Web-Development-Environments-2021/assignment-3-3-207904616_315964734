@@ -101,6 +101,8 @@ const shared_data = {
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
 
+export const bus = new Vue()
+
 new Vue({
   router,
   data() {

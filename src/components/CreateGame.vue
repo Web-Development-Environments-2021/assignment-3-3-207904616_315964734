@@ -1,7 +1,7 @@
 <template>
  <div>
     
-    <b-modal id="createGame" size="lg"
+    <b-modal id="createGame" size="lg" :hide-footer="true"
       title="Create New Game"
       :home-team="homeTeam"
       :away-team="awayTeam"
@@ -13,7 +13,7 @@
     >
       <b-container fluid>
 
-      <b-form @submit.prevent="onRegister" @reset.prevent="onReset"> 
+      <b-form @submit.prevent="createNewGame" @reset.prevent="onReset"> 
 
         <b-row class="mb-1">
           <b-col cols="2">Home Team</b-col>
@@ -76,13 +76,14 @@
           </b-col>
 
         </b-row>
- <b-button type="reset" variant="secondary">Reset</b-button>
+
+      <b-button type="reset" variant="secondary">Reset</b-button>
       <b-button
         type="submit"
         variant="success"
         style="width:250px;"
         class="ml-5 w-75"
-        >Register</b-button
+        >Create Game</b-button
       >
     </b-form>
 
@@ -95,6 +96,8 @@
 </template>
 
 <script>
+import {bus} from "../main";
+
   export default {
     data() {
     //   // 15th two months prior
@@ -111,17 +114,66 @@
         gameStadium: 'Select Stadium',
         referee: 'Select Referee'
       }
-    },
+    },    
     methods:{
-        createNewGame(){
-            if (homeTeam == awayTeam || referee == "Select Referee" || gameStadium == "Select Stadium"){
-                return
-            }
-        }
+        async createNewGame(){
+          if (this.homeTeam == this.awayTeam || this.referee == "Select Referee" || this.gameStadium == "Select Stadium" ||
+            this.gameDate == '' || this.gameHour == '' ){
+              return false
+          }
+
+    
+          let dateTime = this.gameDate + " " + this.gameHour
+     
+
+          try{
+            // Create game post
+            const response = await this.axios.post("http://localhost:3000/manage/createGame",
+            {
+              home_team_id: this.homeTeamIdSelected,
+              away_team_id: this.awayTeamIdSelected,
+              date_time: dateTime,
+              stadium: this.gameStadium,
+              referee_id: this.referee
+            });
+            this.$root.toast("Game created", "Game created suuccessfully", "success");
+            this.onReset()
+            //////
+            bus.$emit("updateGamesInCurStage", "hello fired" )
+            this.$bvModal.hide("createGame")
+            ////////
+          }catch (err) {
+            this.$root.toast("Create failed", "Game wasnt created", "danger");
+            this.onReset()            
+            console.log(err.response);
+            this.form.submitError = err.response.data.message;
+          }
+
+
+        },
+        onReset(){
+          this.homeTeam = 'Select Team',
+          this.awayTeam = 'Select Team',
+          this.gameDate = '',
+          this.gameHour = '',
+          this.gameStadium = 'Select Stadium',
+          this.referee = 'Select Referee'
+        },
+        validateState(param) {
+          const { $dirty, $error } = this.$v.form[param];
+          return $dirty ? !$error : null;
+        },
     },
     computed:{
     teamNames(){
-      return ["Select Team",...this.allTeams.map(team => team.name)]}
+      return ["Select Team",...this.allTeams.map(team => team.name)]
+    },
+    homeTeamIdSelected(){
+      return this.allTeams.filter(team => team.name == this.homeTeam)[0].id
+    },
+    awayTeamIdSelected(){
+      return this.allTeams.filter(team => team.name == this.awayTeam)[0].id
+    },
   }
   }
 </script>
