@@ -117,14 +117,46 @@ import {bus} from "../main";
     },    
     methods:{
         async createNewGame(){
-          if (this.homeTeam == this.awayTeam || this.referee == "Select Referee" || this.gameStadium == "Select Stadium" ||
-            this.gameDate == '' || this.gameHour == '' ){
-              return false
-          }
+          // if (this.homeTeam == this.awayTeam || this.referee == "Select Referee" || this.gameStadium == "Select Stadium" ||
+          //   this.gameDate == '' || this.gameHour == '' ){
+          //     return false
+          // }
 
-    
           let dateTime = this.gameDate + " " + this.gameHour
-     
+
+          if(this.homeTeam == this.awayTeam){
+            this.$root.toast("Create failed", "Home and Away teams are the same", "danger");
+            this.onReset()
+            return false;
+          } else if(this.homeTeam == 'Select Team') {
+            this.$root.toast("Create failed", "Home team isn't chosen", "danger");
+            this.onReset()
+            return false;            
+          } else if(this.awayTeam == 'Select Team'){
+            this.$root.toast("Create failed", "Away team isn't chosen", "danger");
+            this.onReset()
+            return false;        
+          } else if(this.gameStadium === 'Select Stadium'){
+            this.$root.toast("Create failed", "Stadium isn't chosen", "danger");
+            this.onReset()
+            return false;      
+          } else if(this.gameDate == ''){
+            this.$root.toast("Create failed", "Date isn't chosen", "danger");
+            this.onReset()
+            return false; 
+          } else if(this.gameHour == ''){
+            this.$root.toast("Create failed", "Hour isn't chosen", "danger");
+            this.onReset()
+            return false; 
+          } else if(this.referee == 'Select Referee'){
+            this.$root.toast("Create failed", "Referee isn't chosen", "danger");
+            this.onReset()
+            return false; 
+          } else if(new Date(dateTime) < new Date()){
+            this.$root.toast("Create failed", "Please Enter future Date", "danger");
+            this.onReset()
+            return false; 
+          }
 
           try{
             // Create game post
