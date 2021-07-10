@@ -107,8 +107,11 @@ export default {
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
         this.$router.push("/").catch(()=>{});
-      } catch (err) {
+      } catch (err) {        
         console.log(err.response);
+        this.$root.toast("Login failed", "Wrong username or password", "danger");
+        this.form.username = "";
+        this.form.password = "";
         this.form.submitError = err.response.data.message;
       }
     },

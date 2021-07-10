@@ -206,8 +206,8 @@ export default {
       return $dirty ? !$error : null;
     },
     async Register() {
-      try {
-        const response = await this.axios.post("http://localhost:3000/auth/register",
+      try {    
+        const response = await this.axios.post("http://localhost:3000/register",
         {
           username: this.form.username,         
           firstname: this.form.firstName,
@@ -216,8 +216,7 @@ export default {
           password: this.form.password,
           email: this.form.email,
           imageUrl: null
-
-        })
+        });
 
         // const response2 = await this.axios.post(
         //   "https://test-for-3-2.herokuapp.com/user/Register",
@@ -227,8 +226,12 @@ export default {
         //   }
         // );
         this.$router.push("/login");
-        // console.log(response);
+        this.$root.toast("Register success", "new user created", "success");
+        console.log(response);
       } catch (err) {
+        this.$root.toast("Register failed", "Username or email are already taken", "danger");
+        this.onReset()
+        console.log("HIIIIIIIIIIIIIIIIII")
         console.log(err.response);
         this.form.submitError = err.response.data.message;
       }
