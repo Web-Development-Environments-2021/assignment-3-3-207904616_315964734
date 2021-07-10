@@ -137,7 +137,6 @@ export default {
      methods:{
 
     funcToPopPlayerModal(player){
-      debugger
       this.$bvModal.show("modal-player-team")
       this.playerClicked = player
       

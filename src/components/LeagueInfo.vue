@@ -69,7 +69,6 @@ export default {
   },
   methods:{
     fireUpEvent(){
-      debugger
       this.$emit("updateGamesHere")
     }
   }

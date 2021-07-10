@@ -76,7 +76,7 @@ export default {
  
   }, 
   mounted(){
-    console.log("game preview mounted")
+    // console.log("game preview mounted")
     if (this.$root.store.favorites){
           if (this.$root.store.favorites.find(game => game.game_id == this.game_id)){
             this.add = false}} else { this.add = true}
@@ -116,14 +116,13 @@ export default {
   methods:{
     async addGameToFavorites(){
       try{
-        debugger
         const response = await this.axios.post(
           "http://localhost:3000/favorites/addGame",
           {
             id: this.game_id
           }
         );
-        this.$root.toast("Games added Successfully", "Please see Favorites Page", "success");
+        this.$root.toast("Games added Successfully", "For more information Please see Favorites Page", "success");
         this.$emit("updateGamesHere")
         this.add = false
 

@@ -20,14 +20,14 @@
     <b-card-text>
         <ul class="player-content">  
             <!-- <li> Player Id: {{ id }}</li> -->
-            <li v-if="teamName"> Team: {{ teamName }}</li>
-            <li v-if="playerPos"> Position: {{ playerPos }}</li>  
-            <li v-if="common_name"> Common name: {{common_name}}</li>
-            <li v-if="nationality"> Nationality: {{nationality}}</li>
-            <li v-if="birthDate"> Birth Date: {{birthDate}}</li>
-            <li v-if="birthCountry"> Birth Country: {{birthCountry}}</li> 
-            <li v-if="height"> height: {{height}} cm</li>
-            <li v-if="weight"> weight: {{weight}} kg</li>
+            <li v-if="teamName"> Team: <b>{{ teamName }}</b></li>
+            <li v-if="playerPos"> Position: <b>{{ playerPos }}</b></li>  
+            <li v-if="common_name"> Common name: <b>{{common_name}}</b></li>
+            <li v-if="nationality"> Nationality: <b>{{nationality}}</b></li>
+            <li v-if="birthDate"> Birth Date: <b>{{birthDate}}</b></li>
+            <li v-if="birthCountry"> Birth Country: <b>{{birthCountry}}</b></li> 
+            <li v-if="height"> height: <b>{{height}} cm</b></li>
+            <li v-if="weight"> weight: <b>{{weight}} kg</b></li>
         </ul> 
     </b-card-text>
     </div>
@@ -77,7 +77,7 @@ export default {
             // required: true
         },
         height:{
-            type: String,
+            type: Number,
             // required: true
         },
         weight:{
