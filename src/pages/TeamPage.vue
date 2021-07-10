@@ -5,9 +5,9 @@
     <center>
           <div class="generalTeamData" >
 
-  <b-card  v-on:click="openTeamPage"
-    :title= "teamName"
-    :img-src= "imageUrl"
+  <b-card 
+    :title= "team.name"
+    :img-src= "team.imageUrl"
     img-alt="Image"
     img-bottom
     tag="article"
@@ -27,12 +27,8 @@
     <div class="row">
         <!-- <br/><center><h5>Players</h5></center><br/><br/> -->
         <PlayerPreview v-for="player in filteredPlayersByTeam" :key="player.id"
-        :id="player.id"
-        :playerName="player.name"
-        :teamName="player.team_name"
-        :position="player.position_id"
-        :imageUrl="player.imageUrl"
-        ></PlayerPreview>
+        :player="player"
+        @firePlayer="funcToPopPlayerModal"></PlayerPreview>
     </div>
 </div>
 <div class="column-games" >
@@ -71,11 +67,30 @@
   
 </div>
 
+  <b-modal id="modal-player-team" title="Player Card" size="lg" :hide-footer="true" >
+    <PlayerFull
+    :id="this.playerClicked.id"
+    :playerName="this.playerClicked.name"
+    :teamName="this.playerClicked.team_name"
+    :position="this.playerClicked.position_id"
+    :common_name="this.playerClicked.common_name"
+    :nationality="this.playerClicked.nationality"
+    :birthCountry="this.playerClicked.birthcountry"
+    :birthDate="this.playerClicked.birthdate"
+    :height="this.playerClicked.height"
+    :weight="this.playerClicked.weight"       
+    :imageUrl="this.playerClicked.imageUrl"
+    ></PlayerFull>
+  </b-modal>
+
+
 </div>
 </template>
 
 <script>
 import PlayerPreview from "../components/PlayerPreview.vue"
+import PlayerFull from "../components/PlayerFull.vue"
+
 import PastGame from "../components/PastGame.vue"
 import GamePreview from "../components/GamePreview.vue"
 // import TeamPreview from "../components/TeamPreview.vue";
@@ -87,31 +102,48 @@ export default {
         PlayerPreview,
         PastGame,
         GamePreview,
+        PlayerFull
         // TeamPreview: TeamPreview,
 
     },
     data(){
         return{
-            idOfTeam: "86",
-            imageUrl:"https://cdn.sportmonks.com/images//soccer/teams/22/86.png",
-            teamName:"Silkeborg",
+            // idOfTeam: "86",
+            // imageUrl:"https://cdn.sportmonks.com/images//soccer/teams/22/86.png",
+            // teamName:"Silkeborg",
+            playerClicked: {},
+
             allPlayers: JSON.parse(localStorage.getItem('allPlayers')),            
             futureGames: JSON.parse(localStorage.getItem('curStage')).futureGames,
-            pastGames: JSON.parse(localStorage.getItem('curStage')).pastGames
+            pastGames: JSON.parse(localStorage.getItem('curStage')).pastGames,
+            allTeams: JSON.parse(localStorage.getItem('allTeams')),
+
         }
     },
     computed:{
         filteredPlayersByTeam(){
-            return this.allPlayers.filter(player => player.team_id == this.idOfTeam)
+            return this.allPlayers.filter(player => player.team_id == this.team.id)
         },
         filteredPastGamesOfTeam(){
-            return this.pastGames.filter(game => game.home_team_id == this.idOfTeam || game.away_team_id == this.idOfTeam)
+            return this.pastGames.filter(game => game.home_team_id == this.team.id || game.away_team_id == this.team.id)
         },
         filteredFutureGamesOfTeam(){
-            return this.futureGames.filter(game => game.home_team_id == this.idOfTeam || game.away_team_id == this.idOfTeam)
+            return this.futureGames.filter(game => game.home_team_id == this.team.id || game.away_team_id == this.team.id)
+        },
+        team(){
+            return this.allTeams.find(team => team.id == this.$route.params.id)
         }
-    }
+    },
+     methods:{
+
+    funcToPopPlayerModal(player){
+      debugger
+      this.$bvModal.show("modal-player-team")
+      this.playerClicked = player
+      
+        },
         
+    }
 }
 </script>
 

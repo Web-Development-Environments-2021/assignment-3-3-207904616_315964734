@@ -104,6 +104,7 @@ export default {
   methods:{
     async addGameToFavorites(){
       try{
+        debugger
         const response = await this.axios.post(
           "http://localhost:3000/favorites/addGame",
           {
@@ -111,6 +112,8 @@ export default {
           }
         );
         this.$root.toast("Games added Successfully", "Please see Favorites Page", "success");
+        this.$emit("updateGamesHere")
+
       }
       catch{
         this.$root.toast("Something went Wrong", "Game already in favorite list or Please try again in few seconds", "danger");
@@ -125,6 +128,7 @@ export default {
           }
         );
         this.$root.toast("Games Removed Successfully", "Please see Favorites Page", "success");
+        this.$emit("updateGamesHere")
       }
       catch{
         this.$root.toast("Something went Wrong", "Game already in Removed or Please try again in few seconds", "danger");

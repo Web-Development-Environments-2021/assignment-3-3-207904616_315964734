@@ -8,7 +8,9 @@
 
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
         <b-nav-item :to="{ name: 'games' }">Games</b-nav-item>
+        <b-nav-item v-if="$root.store.username == 'fifaRep'" v-b-modal.createGame>Create Game</b-nav-item>
         <b-nav-item v-b-modal.about>About</b-nav-item>
+
 
 
         </b-navbar-nav>
@@ -29,7 +31,7 @@
     </b-navbar>
     <router-view />
 
-    <b-modal id="about" title="About Us" hide-footer="true">
+    <b-modal id="about" title="About Us" :hide-footer="true">
     <center>
     <p class="my-2">Hey! Nice to Meet You!</p>
     <p class="my-3">We are Omer Tagger and Omer Niv</p>
@@ -40,13 +42,21 @@
     </center>  
   </b-modal>
 
+  <CreateGame></CreateGame>
+
 
   </div>
 </template>
 
 <script>
+import CreateGame from "./components/CreateGame.vue";
+
 export default {
+
   name: "App",
+  components: {
+    CreateGame
+  },
   methods: {
     Logout() {
       this.$root.store.logout();

@@ -36,7 +36,7 @@ export default {
 
   methods:{
     openTeamPage(){
-    this.$router.push("/team").catch(() => {
+    this.$router.push(`/team/${this.teamId}`).catch(() => {
         this.$forceUpdate();
       });    
   },

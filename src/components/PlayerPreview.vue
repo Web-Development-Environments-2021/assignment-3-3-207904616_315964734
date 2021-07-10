@@ -1,8 +1,8 @@
 <template>
 <div class="container_player">
   <b-card v-on:click="openModal"
-    :title= "playerName"
-    :img-src= "imageUrl"
+    :title= "player.name"
+    :img-src= "player.imageUrl"
     img-alt="Image"
     img-top
     tag="article"
@@ -15,7 +15,7 @@
     <b-card-text>
         <ul class="player_content" >  
             <!-- <li> Player Id: {{ id }}</li> -->
-            <li> Team <b>{{ teamName }}</b></li>
+            <li> Team <b>{{ this.player.team_name }}</b></li>
             <li> Position <b>{{ playerPos }}</b></li>     
         </ul> 
     </b-card-text>
@@ -29,26 +29,29 @@
 export default {
     name: "PlayerPreview",    
     props: {
-        id: {
-            type: Number,
-            required: true
-        },
-        playerName:{
-            type: String,
-            required: true
-        },
-        teamName:{
-            type: String,
-            // required: true
-        },
-        imageUrl:{
-            type: String,
-            // required: true
-        },
-        position:{
-            type: Number,
-            // required:true
+        player: {
+            type: Object
         }
+    //     id: {
+    //         type: Number,
+    //         required: true
+    //     },
+    //     playerName:{
+    //         type: String,
+    //         required: true
+    //     },
+    //     teamName:{
+    //         type: String,
+    //         // required: true
+    //     },
+    //     imageUrl:{
+    //         type: String,
+    //         // required: true
+    //     },
+    //     position:{
+    //         type: Number,
+    //         // required:true
+    //     }
     },
     data() {
     return {
@@ -62,15 +65,14 @@ export default {
     },
     computed:{
         playerPos(){
-            return this.positionList[this.position -1]
+            return this.positionList[this.player.position_id -1]
         }
     },
     methods:
     {
         openModal(){
-            this.$router.push("/").catch(() => {
-        this.$forceUpdate();
-      }); 
+            this.$emit("firePlayer", this.player)
+            
         }
     }
 }

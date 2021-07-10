@@ -32,7 +32,7 @@
           :away_team_id="nextGame.away_team_id" 
           :date_time="nextGame.date_time"
           :stadium="nextGame.stadium" 
-          ></GamePreview>
+          @updateGamesHere="fireUpEvent" ></GamePreview>
       </center>
       </div>
     </div>
@@ -65,6 +65,12 @@ export default {
       console.log(this.info.next_match_details)
       return this.info.next_match_details
 
+    }
+  },
+  methods:{
+    fireUpEvent(){
+      debugger
+      this.$emit("updateGamesHere")
     }
   }
 }

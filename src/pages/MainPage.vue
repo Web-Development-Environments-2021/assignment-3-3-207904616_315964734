@@ -7,14 +7,14 @@
       
       <div class="column-main">
       
-    <LeagueInfo></LeagueInfo>
+    <LeagueInfo @updateGamesHere="flagGamesUpdate=true"></LeagueInfo>
      
      </div>
       <div class="column-main">
        
     <LoginPage v-if="!$root.store.username"></LoginPage>
-    <FavoriteGames v-else></FavoriteGames>
-   
+    <FavoriteGames v-else :flagGamesUpdate="flagGamesUpdate" @resetFlag="flagGamesUpdate=false"></FavoriteGames>
+
       </div>
     </div>
   </div>
@@ -25,6 +25,11 @@ import LeagueInfo from "../components/LeagueInfo";
 import FavoriteGames from "../components/FavoriteGames";
 import LoginPage from "../pages/LoginPage";
 export default {
+  data(){
+    return{
+      flagGamesUpdate: false
+    }
+  },
   components: {
     LeagueInfo, 
     LoginPage, 

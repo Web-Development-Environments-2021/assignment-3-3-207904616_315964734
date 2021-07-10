@@ -69,7 +69,7 @@ export default {
             // required: true
         },
         birthDate:{
-            type: Number,
+            type: String,
             // required:true
         },
         birthCountry:{
@@ -81,7 +81,7 @@ export default {
             // required: true
         },
         weight:{
-            type: String,
+            type: Number,
             // required:true
         }
     },

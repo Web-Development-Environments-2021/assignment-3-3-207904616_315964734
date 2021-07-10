@@ -4,13 +4,13 @@
     <center>
 
     <b-input-group prepend="Search" id="search-input">
-      <b-form-input v-model="searchQuery"></b-form-input>
+      <b-form-input v-debounce:300ms="saveQuery" v-model="searchQuery"></b-form-input>
       <b-input-group-append>
         <!-- <b-button @click="searchTeamAndPlayers" variant="success">Search</b-button><br/> -->
         <b-form-select v-model="selected" :options="options"></b-form-select>
         <b-form-select v-model="selectedTeam" :options="teamNames"></b-form-select>
         <b-form-select v-model="selectedPosition" :options="positionList"></b-form-select>
-          <b-button v-b-modal.modal-player>modal</b-button>
+          <!-- <b-button v-b-modal.modal-player>modal</b-button> -->
 
           </b-input-group-append>
     </b-input-group>
@@ -41,18 +41,16 @@
         <div v-if="zeroPlayers"><center><h2 >No Result</h2></center></div>
 
         <PlayerPreview v-for="player in filterPlayerbyPosition" :key="player.id"
-          :id="player.id"
-          :playerName="player.name"
-          :teamName="player.team_name"
-          :position="player.position_id"
-          :imageUrl="player.imageUrl" ></PlayerPreview>        
+          :player="player" 
+          @firePlayer="funcToPopPlayerModal"
+          ></PlayerPreview>        
           </div>         
         </div>
       </div>
       </div>
     
 
-  <b-modal id="modal-player" title="Player Card" size="lg" hide-footer="true">
+  <b-modal id="modal-player" title="Player Card" size="lg" :hide-footer="true" >
     <PlayerFull
     :id="this.playerClicked.id"
     :playerName="this.playerClicked.name"
@@ -87,6 +85,8 @@ export default {
 
  data() {
     return {
+      showPlayerModal: false,
+      playerClicked: {},
       searchQuery:"",
       selectedTeam: "Select Team",
       selectedPosition: "Select Position",
@@ -114,6 +114,11 @@ export default {
       sortedAndFilteredTeams: JSON.parse(localStorage.getItem('allTeams')),
       lastSearchQuery: "",
     };
+  },
+  mounted(){
+    if (localStorage.getItem("LastQuery")){
+    this.searchQuery = localStorage.getItem("LastQuery")
+    }
   },
   computed:{
     teamNames(){
@@ -173,9 +178,7 @@ export default {
       
       return this.filterPlayersByTeamName 
     },
-    playerClicked(){
-      return this.allPlayers[0]
-    },
+    
     zeroTeams(){
       if (this.filterTeamsByTeamName.length == 0) return true 
       return false
@@ -186,6 +189,11 @@ export default {
     }
     },
   methods:{
+
+    funcToPopPlayerModal(player){
+      this.$bvModal.show("modal-player")
+      this.playerClicked = player
+    },
 
     searchTeamAndPlayers(){
       this.relevantTeams = []
@@ -228,6 +236,10 @@ export default {
       } else if( this.selected === "Sort Players by position") {
         this.relevantPlayers = this.relevantPlayers.sort((a,b) =>(a.position_id > b.position_id ? 1 : -1))
       }
+    },
+    saveQuery(data){
+      // console.log(data)
+      localStorage.setItem("LastQuery", data)
     }     
   }
 }

@@ -2,6 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
+import vueDebounce from 'vue-debounce'
+
 
 import routes from "./routes";
 import VueRouter from "vue-router";
@@ -26,7 +28,10 @@ import {
   ToastPlugin,
   LayoutPlugin, 
   InputGroupPlugin,
-  ModalPlugin
+  ModalPlugin,
+  FormDatepickerPlugin,
+  TimePlugin
+
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -40,9 +45,14 @@ import {
   ToastPlugin,
   LayoutPlugin, 
   InputGroupPlugin,
-  ModalPlugin
+  ModalPlugin,
+  FormDatepickerPlugin,
+  TimePlugin
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
+
+
+Vue.use(vueDebounce)
 
 axios.interceptors.request.use(
   function(config) {

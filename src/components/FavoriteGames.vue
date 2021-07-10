@@ -10,7 +10,8 @@
       :away_team_id="g.away_team_id" 
       :date_time="g.date_time"
       :stadium="g.stadium" 
-      :key="g.game_id"></GamePreview>
+      :key="g.game_id"
+      @updateGamesHere="updateGames" @removeGames="updateGames"></GamePreview>
     </center>
   </div>
 </template>
@@ -19,6 +20,11 @@
 import GamePreview from "./GamePreview.vue";
 export default {
   name: "FavoriteGames",
+  props:{
+      flagGamesUpdate:{
+        type: Boolean
+      }
+  },
   components: {
     GamePreview
   },
@@ -58,6 +64,8 @@ export default {
         this.favGames.push(...games);
         // console.log(response.data);
         // console.log("done");
+        console.log(this.favGames)
+        // localStorage.setItem("favorites", games)
       } catch (error) {
         // console.log("error in update games")
         console.log(error);
@@ -68,8 +76,14 @@ export default {
     console.log("favorite games mounted");
     this.updateGames(); 
   },
-  Computed:{
-
+  computed:{
+   
+  },
+  watch:{
+    flagGamesUpdate(){
+      this.updateGames(); 
+      this.$emit("resetFlag")
+    }
   }
   
 };
