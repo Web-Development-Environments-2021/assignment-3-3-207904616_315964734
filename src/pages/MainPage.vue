@@ -13,7 +13,7 @@
       <div class="column-main">
        
     <LoginPage v-if="!$root.store.username"></LoginPage>
-    <FavoriteGames v-else :flagGamesUpdate="flagGamesUpdate" @resetFlag="flagGamesUpdate=false"></FavoriteGames>
+    <FavoriteGames v-else :flagGamesUpdate="flagGamesUpdate" @resetFlag="flagGamesUpdate=false" :toslice="true"></FavoriteGames>
 
       </div>
     </div>

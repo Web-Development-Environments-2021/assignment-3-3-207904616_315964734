@@ -82,6 +82,7 @@ export default {
 .container_player{
     width: 22%;
     margin: 7px;
+    cursor: pointer;
 }
 .player_content{
     list-style-type: none;

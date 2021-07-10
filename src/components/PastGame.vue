@@ -8,17 +8,17 @@
     <div class="game-content">
       <div class="row">
       <div class="column">
-      Home Team: {{ homeTeamName }}
-      <img :src= this.homeTeamURL class="center">
-
+      Home Team
+      <img :src= this.homeTeamURL class="center" style="cursor: pointer;" @click="homeTeamPage">
+      {{ homeTeamName }}
       </div>
       <div class="column">
-      Away Team: {{ awayTeamName }}
-      <img :src= this.awayTeamURL class="center">
+      Away Team 
+      <img :src= this.awayTeamURL class="center" style="cursor: pointer;" @click="awayTeamPage">
+      {{ awayTeamName }}
       </div>
       </div>
 
-      <br/>
       
       <li>Game Id: {{ game_id }}</li>
       <li> Time: {{ time }}</li>
@@ -132,6 +132,18 @@ export default {
     },
     awayTeamURL(){
       return this.allTeams.filter(team => team.id == this.away_team_id)[0].imageUrl
+    }
+  },
+  methods:{
+    homeTeamPage(){
+        this.$router.push(`/team/${this.home_team_id}`).catch(() => {
+        this.$forceUpdate();
+      }); 
+    },
+    awayTeamPage(){
+        this.$router.push(`/team/${this.away_team_id}`).catch(() => {
+        this.$forceUpdate();
+      });
     }
   }
 

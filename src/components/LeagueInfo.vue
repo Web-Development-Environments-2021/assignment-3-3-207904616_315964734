@@ -4,11 +4,11 @@
       <div class="row">
 
       <center>
-      <b-card
+      <b-card 
       img-alt="Image"
       img-src="/Superliga.png"
       tag="article"
-      style="max-width: 17rem; border: none"
+      style="max-width: 17rem; border: none; background: transparent"
       class="mb-2"
     >
       <!-- <b-card-title>{{leagueName}}</b-card-title> -->

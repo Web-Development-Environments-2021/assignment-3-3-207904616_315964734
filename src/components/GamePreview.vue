@@ -9,12 +9,12 @@
       <div class="row">
       <div class="column">
       Home Team 
-      <img :src= this.homeTeamURL class="center">
+      <img :src= this.homeTeamURL class="center" style="cursor: pointer;" @click="homeTeamPage">
       {{ homeTeamName }}
       </div>
       <div class="column">
       Away Team 
-      <img :src= this.awayTeamURL class="center">
+      <img :src= this.awayTeamURL class="center" style="cursor: pointer;" @click="awayTeamPage">
       {{ awayTeamName }}
       </div>
       </div>
@@ -24,8 +24,8 @@
       <li> Time: {{ time }}</li>
       <li> Date: {{ date }}</li>
       <li> Stadium: {{ stadium }}</li>
-      <b-button variant="success" @click="addGameToFavorites" v-if="$root.store.username && alreadyFav" style="margin: 10px;"> Add To Favorites</b-button>
-      <b-button variant="danger" @click="removeGameFromFavorites" v-if="$root.store.username && alreadyFav" style="margin: 10px;"> Remove From Favorites</b-button>
+      <b-button variant="success" @click="addGameToFavorites" v-if="$root.store.username && this.add " style="margin: 10px;"> Add To Favorites</b-button>
+      <b-button variant="danger" @click="removeGameFromFavorites" v-if="$root.store.username && !this.add " style="margin: 10px;"> Remove From Favorites</b-button>
 
       
     </div>
@@ -37,7 +37,8 @@
 export default {
   data(){
     return {
-      allTeams: JSON.parse(localStorage.getItem('allTeams'))
+      allTeams: JSON.parse(localStorage.getItem('allTeams')),
+      add: true
     }
   },
   name: "GamePreview",
@@ -72,9 +73,13 @@ export default {
       winner_team_id: {
         type: Number
       }
+ 
   }, 
   mounted(){
     console.log("game preview mounted")
+    if (this.$root.store.favorites){
+          if (this.$root.store.favorites.find(game => game.game_id == this.game_id)){
+            this.add = false}} else { this.add = true}
   },
   computed:{
     homeTeamName(){
@@ -95,11 +100,18 @@ export default {
     awayTeamURL(){
       return this.allTeams.filter(team => team.id == this.away_team_id)[0].imageUrl
     },
-    alreadyFav(){
-      // if (!$root.store.username) return false
-      // console.log($FavoriteGames.favGames)
-      return true
-    }
+    // alreadyFav(){
+    //   if (this.$root.store.favorites){
+    //       if (this.$root.store.favorites.find(game => game.game_id == this.game_id)){
+    //         this.add = false
+    //         return false
+    //       }
+    //   }
+    //   this.add = true
+    //   return true
+    //   // console.log($FavoriteGames.favGames)
+      
+    // }
   },
   methods:{
     async addGameToFavorites(){
@@ -113,6 +125,7 @@ export default {
         );
         this.$root.toast("Games added Successfully", "Please see Favorites Page", "success");
         this.$emit("updateGamesHere")
+        this.add = false
 
       }
       catch{
@@ -129,10 +142,21 @@ export default {
         );
         this.$root.toast("Games Removed Successfully", "Please see Favorites Page", "success");
         this.$emit("updateGamesHere")
+        this.add = true
       }
       catch{
         this.$root.toast("Something went Wrong", "Game already in Removed or Please try again in few seconds", "danger");
       }
+    },
+    homeTeamPage(){
+        this.$router.push(`/team/${this.home_team_id}`).catch(() => {
+        this.$forceUpdate();
+      }); 
+    },
+    awayTeamPage(){
+        this.$router.push(`/team/${this.away_team_id}`).catch(() => {
+        this.$forceUpdate();
+      });
     }
   
   }
