@@ -80,7 +80,8 @@ export default {
   created(){
       bus.$on("favoritesChanged", (data) => {
         // console.log("we are on fire !")
-        this.add = !this.add
+        if (date == "added") this.add = false
+        else this.add = true
     })
   } ,
   mounted(){
@@ -132,7 +133,7 @@ export default {
         );
         this.$root.toast("Games added Successfully", "For more information Please see Favorites Page", "success");
         this.$emit("updateGamesHere")
-        bus.$emit("favoritesChanged", "hello fired" )
+        bus.$emit("favoritesChanged", "added" )
 
         this.add = false
 
@@ -151,7 +152,7 @@ export default {
         );
         this.$root.toast("Games Removed Successfully", "Please see Favorites Page", "success");
         this.$emit("updateGamesHere")
-        bus.$emit("favoritesChanged", "hello fired" )
+        bus.$emit("favoritesChanged", "removed" )
         this.add = true
       }
       catch{
@@ -167,7 +168,12 @@ export default {
         this.$router.push(`/team/${this.away_team_id}`).catch(() => {
         this.$forceUpdate();
       });
-    }
+    },
+    // renderAfterChange(){
+    //   if (this.$root.store.favorites){
+    //       if (this.$root.store.favorites.find(game => game.game_id == this.game_id)){
+    //         return this.add = false}} else { return this.add = true}
+    // }
   
   }
 

@@ -48,7 +48,8 @@ export default {
     data(){
         return{
             futureGames: JSON.parse(localStorage.getItem('curStage')).futureGames,
-            pastGames: JSON.parse(localStorage.getItem('curStage')).pastGames
+            pastGames: JSON.parse(localStorage.getItem('curStage')).pastGames,
+            favorites: this.$root.store.favorites
         }
     },
     methods:{
@@ -64,7 +65,10 @@ export default {
     created(){
         bus.$on("updateGamesInCurStage", (data) => {        
           this.loadFutureGamesFromServer()          
-        })      
+        }) 
+        //  bus.$on("favoritesChanged", (data) => {
+        // this.favorites = this.favorites
+        // })     
     },
     computed:{
       sortedPastGames(){
